@@ -1,0 +1,16 @@
+body {
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+}
+#enchant-stage {
+  width: 100%;
+}
+@media screen and (-ms-view-state: fullscreen-landscape) {
+}
+@media screen and (-ms-view-state: filled) {
+}
+@media screen and (-ms-view-state: snapped) {
+}
+@media screen and (-ms-view-state: fullscreen-portrait) {
+}
