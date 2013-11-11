@@ -2,9 +2,106 @@ body {
   background-color: #fff;
   padding: 0;
   margin: 0;
+  text-align: center;
 }
-#enchant-stage {
+body #game {
+  position: relative;
+  width: 320px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+}
+body #game #header #countimage {
+  width: 30px;
+  height: 30px;
+  background-image: url("../images/queen.png");
+  background-size: contain;
+  float: left;
+}
+body #game #header #countlabel {
+  font-size: x-large;
+  float: left;
+}
+body #game #header #timelabel {
+  font-size: x-large;
+  float: right;
+}
+body #game .overlay {
+  position: absolute;
+  width: 322px;
+  height: 100%;
+  z-index: 2;
+}
+body #game #intro {
+  background-color: #fff;
+}
+body #game #intro .title {
+  background-color: #eee;
+  height: 50px;
+}
+body #game #message {
+  background-color: rgba(255,255,255,0.8);
+}
+body #game #message .messagelabel {
+  font-size: x-large;
+  margin-top: 100px;
+}
+body #game #message #backbutton {
+  margin-top: 50px;
+}
+body #game #field {
+  width: 320px;
+  height: 320px;
+  background-color: #000;
+  padding: 1px;
+  margin-bottom: 5px;
+}
+body #game #field .row {
+  width: 320px;
+  height: 40px;
+}
+body #game #field .row .block {
+  position: relative;
+  margin: 1px;
+  width: 38px;
+  height: 38px;
+  background-color: #fff;
+  float: left;
+}
+body #game #field .row .block .guide {
+  position: absolute;
   width: 100%;
+  height: 100%;
+  background-color: rgba(255,0,0,0.2);
+  z-index: 1;
+}
+body #game #field .row .block.active {
+  background-image: url("../images/queen.png");
+  background-size: contain;
+}
+body #game #field .row .block.active.mark {
+  background-image: url("../images/queen_marked.png");
+  background-size: contain;
+}
+body #game #buttonarea {
+  text-align: center;
+}
+body #game #buttonarea .button {
+  width: 102.66666666666667px;
+  font-size: 0.75rem;
+}
+body #game #buttonarea .button.purple {
+  background-color: #685f93 !important;
+}
+body #game #buttonarea .button.purple:hover {
+  background-color: #403971 !important;
+}
+body #game #buttonarea .button.purple.disabled {
+  background-color: #9b94b8 !important;
+}
+.clear {
+  clear: both;
 }
 @media screen and (-ms-view-state: fullscreen-landscape) {
 }

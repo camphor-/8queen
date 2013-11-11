@@ -59,6 +59,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-shell'
 
   grunt.registerTask 'default', ['watch']
+  grunt.registerTask 'all', ['jade','stylus','coffee']
   grunt.registerTask 'deploy', ['shell:rsync']
 
   return

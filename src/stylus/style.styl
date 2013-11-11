@@ -1,12 +1,98 @@
+block_padding = 1px
+w = 320px
+h = 320px
+len = 8
+
+color_field = #000
+color_white = #fff
+color_blue = #00f
+color_purple_hover = #403971
+color_purple = #685f93
+color_purple_disabled = #9b94b8
+
 body
   background-color #fff
   padding 0
   margin 0
-
-#enchant-stage
-  width 640px
-  height 640px
-  margin 0 auto
+  text-align center
+  #game
+    position relative
+    width w
+    height 100%
+    margin 0 auto
+    padding 15px
+    text-align center
+    #header
+      #countimage
+        width 30px
+        height 30px
+        background-image url('../images/queen.png')
+        background-size contain
+        float left
+      #countlabel
+        font-size x-large
+        float left
+      #timelabel
+        font-size x-large
+        float right
+    .overlay
+      position absolute
+      width w + block_padding * 2
+      height 100%
+      z-index 2
+    #intro
+      background-color color_white
+      .title
+        background-color #eee
+        height 50px
+    #message
+      background-color rgba(255,255,255,0.8)
+      .messagelabel
+        font-size x-large
+        margin-top 100px
+      #backbutton
+        margin-top 50px
+    #field
+      width w
+      height h
+      background-color color_field
+      padding block_padding
+      margin-bottom 5px
+      .row
+        width w
+        height (h / len)
+        .block
+          position relative
+          margin block_padding
+          width (w / len) - (block_padding * 2)
+          height (h / len) - (block_padding * 2)
+          background-color color_white
+          float left
+          .guide
+            position absolute
+            width 100%
+            height 100%
+            background-color rgba(255, 0, 0, 0.2)
+            z-index 1
+        .block.active
+          background-image url('../images/queen.png')
+          background-size contain
+        .block.active.mark
+          background-image url('../images/queen_marked.png')
+          background-size contain
+    #buttonarea
+      text-align center
+      .button
+        width (w / 3 - 4)
+        font-size .75rem
+      .button.purple
+        background-color color_purple !important
+      .button.purple:hover
+        background-color color_purple_hover !important
+      .button.purple.disabled
+        background-color color_purple_disabled !important
+.clear
+  clear both
 
 @media screen and (-ms-view-state: fullscreen-landscape)
   //
