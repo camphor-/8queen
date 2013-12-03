@@ -69,11 +69,13 @@ replaceScene = function(id) {
 toggle = function(block) {
   if (block.status) {
     $(block).removeClass('active');
+    $(block).removeClass('cat' + Main.count);
     block.status = 0;
     Main.count--;
     removeElem(Main.queens, [block.x, block.y]);
   } else if (Main.count < 8) {
     $(block).addClass('active');
+    $(block).addClass('cat' + Main.count);
     block.status = 1;
     Main.count++;
     Main.queens.push([block.x, block.y]);
@@ -187,7 +189,7 @@ switchGuide = function() {
 };
 
 refreshGuide = function() {
-  var guide, i, q, queens, x, y, _i, _len, _results;
+  var block, guide, i, mark, q, queens, x, y, _i, _len, _results;
   clearGuide();
   queens = Main.queens;
   _results = [];
@@ -201,16 +203,24 @@ refreshGuide = function() {
           guide = $('<div>').addClass('guide');
           guide.x = q[0];
           guide.y = x;
-          $(Main.blocks[q[0]][x]).append(guide);
-          $(Main.blocks[q[0]][x]).addClass('mark');
+          block = $(Main.blocks[q[0]][x]);
+          block.append(guide);
+          if (block.hasClass('active')) {
+            mark = $('<div>').addClass('mark');
+            $(guide).append(mark);
+          }
           Main.guides.push(guide);
         }
         if (x !== q[0]) {
           guide = $('<div>').addClass('guide');
           guide.x = x;
           guide.y = q[1];
-          $(Main.blocks[x][q[1]]).append(guide);
-          $(Main.blocks[x][q[1]]).addClass('mark');
+          block = $(Main.blocks[x][q[1]]);
+          block.append(guide);
+          if (block.hasClass('active')) {
+            mark = $('<div>').addClass('mark');
+            $(guide).append(mark);
+          }
           Main.guides.push(guide);
         }
         if (x !== q[0]) {
@@ -219,8 +229,12 @@ refreshGuide = function() {
             guide = $('<div>').addClass('guide');
             guide.x = x;
             guide.y = y;
-            $(Main.blocks[x][y]).append(guide);
-            $(Main.blocks[x][y]).addClass('mark');
+            block = $(Main.blocks[x][y]);
+            block.append(guide);
+            if (block.hasClass('active')) {
+              mark = $('<div>').addClass('mark');
+              $(guide).append(mark);
+            }
             Main.guides.push(guide);
           }
           y = x + q[1] - q[0];
@@ -228,8 +242,12 @@ refreshGuide = function() {
             guide = $('<div>').addClass('guide');
             guide.x = x;
             guide.y = y;
-            $(Main.blocks[x][y]).append(guide);
-            $(Main.blocks[x][y]).addClass('mark');
+            block = $(Main.blocks[x][y]);
+            block.append(guide);
+            if (block.hasClass('active')) {
+              mark = $('<div>').addClass('mark');
+              $(guide).append(mark);
+            }
             _results1.push(Main.guides.push(guide));
           } else {
             _results1.push(void 0);

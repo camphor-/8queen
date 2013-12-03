@@ -15,7 +15,7 @@ body #game {
 body #game #header #countimage {
   width: 30px;
   height: 30px;
-  background-image: url("../images/queen.png");
+  background-image: url("../images/cat8.png");
   background-size: contain;
   float: left;
 }
@@ -83,13 +83,40 @@ body #game #field .row .block .guide {
   background-size: contain;
   z-index: 1;
 }
+body #game #field .row .block .mark {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/batsu.png");
+  background-size: contain;
+  z-index: 2;
+}
 body #game #field .row .block.active {
-  background-image: url("../images/queen.png");
   background-size: contain;
 }
-body #game #field .row .block.active.mark {
-  background-image: url("../images/queen_marked.png");
-  background-size: contain;
+body #game #field .row .block.active.cat0 {
+  background-image: url("../images/cat0.png");
+}
+body #game #field .row .block.active.cat1 {
+  background-image: url("../images/cat1.png");
+}
+body #game #field .row .block.active.cat2 {
+  background-image: url("../images/cat2.png");
+}
+body #game #field .row .block.active.cat3 {
+  background-image: url("../images/cat3.png");
+}
+body #game #field .row .block.active.cat4 {
+  background-image: url("../images/cat4.png");
+}
+body #game #field .row .block.active.cat5 {
+  background-image: url("../images/cat5.png");
+}
+body #game #field .row .block.active.cat6 {
+  background-image: url("../images/cat6.png");
+}
+body #game #field .row .block.active.cat7 {
+  background-image: url("../images/cat7.png");
 }
 body #game #buttonarea {
   text-align: center;
