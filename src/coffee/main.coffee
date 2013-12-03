@@ -10,6 +10,7 @@ Main = {
 }
 
 $ ->
+  replaceScene('intro')
   #ブロック要素を二次元配列に格納
   blocks = $('.block')
   for i in [0...8]
@@ -21,15 +22,15 @@ $ ->
       block.onclick = ->
         toggle(this)
       Main.blocks[i].push(block)
-  $('#message').hide()
   updateCountLabel()
   $('#startbutton').click ->
-    $('#intro').hide()
+    replaceScene('main')
     Main.time = 0
     startTimer()
     updateTimeLabel()
   $('#judgebutton').click ->
-    showResult()
+    if !$('#judgebutton').hasClass('disabled')
+      showResult()
 
   $('#resetbutton').click ->
     reset()
@@ -39,11 +40,17 @@ $ ->
       reset()
       Main.guideEnabled = true
       switchGuide()
-      $('#intro').show()
+      replaceScene('intro')
     $('#message').hide()
 
   $('#guidebutton').click ->
     switchGuide()
+
+replaceScene = (id) ->
+  scenes = ['intro', 'main', 'message']
+  for s, i in scenes
+    $('#'+s).hide()
+  $('#'+id).show()
 
 toggle = (block) ->
   if block.status

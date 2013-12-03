@@ -1,4 +1,4 @@
-var Main, arraysEqual, clearGuide, judge, refreshGuide, removeElem, reset, showMessage, showResult, startTimer, switchGuide, toggle, updateCountLabel, updateJudgeButtonState, updateTimeLabel;
+var Main, arraysEqual, clearGuide, judge, refreshGuide, removeElem, replaceScene, reset, showMessage, showResult, startTimer, switchGuide, toggle, updateCountLabel, updateJudgeButtonState, updateTimeLabel;
 
 Main = {
   blocks: [[], [], [], [], [], [], [], []],
@@ -13,6 +13,7 @@ Main = {
 
 $(function() {
   var block, blocks, i, j, _i, _j;
+  replaceScene('intro');
   blocks = $('.block');
   for (i = _i = 0; _i < 8; i = ++_i) {
     for (j = _j = 0; _j < 8; j = ++_j) {
@@ -26,16 +27,17 @@ $(function() {
       Main.blocks[i].push(block);
     }
   }
-  $('#message').hide();
   updateCountLabel();
   $('#startbutton').click(function() {
-    $('#intro').hide();
+    replaceScene('main');
     Main.time = 0;
     startTimer();
     return updateTimeLabel();
   });
   $('#judgebutton').click(function() {
-    return showResult();
+    if (!$('#judgebutton').hasClass('disabled')) {
+      return showResult();
+    }
   });
   $('#resetbutton').click(function() {
     return reset();
@@ -45,7 +47,7 @@ $(function() {
       reset();
       Main.guideEnabled = true;
       switchGuide();
-      $('#intro').show();
+      replaceScene('intro');
     }
     return $('#message').hide();
   });
@@ -53,6 +55,16 @@ $(function() {
     return switchGuide();
   });
 });
+
+replaceScene = function(id) {
+  var i, s, scenes, _i, _len;
+  scenes = ['intro', 'main', 'message'];
+  for (i = _i = 0, _len = scenes.length; _i < _len; i = ++_i) {
+    s = scenes[i];
+    $('#' + s).hide();
+  }
+  return $('#' + id).show();
+};
 
 toggle = function(block) {
   if (block.status) {

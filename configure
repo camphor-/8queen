@@ -1,3 +1,5 @@
 #!/bin/bash
-npm init
-npm install grunt grunt-contrib-watch grunt-contrib-coffee grunt-contrib-jade grunt-contrib-stylus grunt-shell --save-dev
+dir=$(cd $(dirname $BASH_SOURCE); pwd)
+sudo ln -s ../node_modules $dir
+sudo ln -s ../Gruntfile.coffee $dir
+sudo ln -s ../package.json $dir

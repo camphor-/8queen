@@ -1,12 +1,12 @@
 body {
-  background-color: #fff;
+  background-image: url("../images/background2.png");
   padding: 0;
   margin: 0;
   text-align: center;
 }
 body #game {
   position: relative;
-  width: 320px;
+  width: 480px;
   height: 100%;
   margin: 0 auto;
   padding: 15px;
@@ -29,51 +29,58 @@ body #game #header #timelabel {
 }
 body #game .overlay {
   position: absolute;
-  width: 322px;
+  width: 482px;
   height: 100%;
   z-index: 2;
 }
-body #game #intro {
-  background-color: #fff;
-}
 body #game #intro .title {
-  background-color: #eee;
-  height: 50px;
+  width: 354px;
+  height: 112px;
+  margin: 0 auto;
+  background-image: url("../images/title.png");
 }
 body #game #message {
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(0,0,0,0.75);
+  color: #fff;
+  width: 70%;
+  height: 50%;
+  margin: 0 15%;
+  top: 25%;
 }
 body #game #message .messagelabel {
   font-size: x-large;
-  margin-top: 100px;
-}
-body #game #message #backbutton {
   margin-top: 50px;
 }
+body #game #message #backbutton {
+  position: absolute;
+  left: 40%;
+  bottom: 30px;
+}
 body #game #field {
-  width: 320px;
-  height: 320px;
-  background-color: #000;
+  width: 480px;
+  height: 480px;
+  background-image: url("../images/field.png");
+  background-size: contain;
   padding: 1px;
   margin-bottom: 5px;
 }
 body #game #field .row {
-  width: 320px;
-  height: 40px;
+  width: 480px;
+  height: 60px;
 }
 body #game #field .row .block {
   position: relative;
   margin: 1px;
-  width: 38px;
-  height: 38px;
-  background-color: #fff;
+  width: 58px;
+  height: 58px;
   float: left;
 }
 body #game #field .row .block .guide {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(255,0,0,0.2);
+  background-image: url("../images/mark.png");
+  background-size: contain;
   z-index: 1;
 }
 body #game #field .row .block.active {
@@ -88,7 +95,7 @@ body #game #buttonarea {
   text-align: center;
 }
 body #game #buttonarea .button {
-  width: 102.66666666666667px;
+  width: 156px;
   font-size: 0.75rem;
 }
 body #game #buttonarea .button.purple {
