@@ -1,5 +1,0 @@
-#!/bin/bash
-dir=$(cd $(dirname $BASH_SOURCE); pwd)
-sudo ln -s ../node_modules $dir
-sudo ln -s ../Gruntfile.coffee $dir
-sudo ln -s ../package.json $dir
