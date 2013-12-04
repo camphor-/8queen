@@ -1,4 +1,4 @@
-Main = {
+Main = 
   blocks: [[],[],[],[],[],[],[],[]]
   queens: []
   guides: []
@@ -7,7 +7,7 @@ Main = {
   time: 0
   timer: null
   result: false
-}
+  queenImageUsed: [false, false, false, false, false, false, false, false]
 
 $ ->
   replaceScene('intro')
@@ -55,14 +55,17 @@ replaceScene = (id) ->
 toggle = (block) ->
   if block.status
     $(block).removeClass('active')
-    $(block).removeClass('cat'+Main.count)
+    $(block).removeClass('cat'+block.image)
+    Main.queenImageUsed[block.image] = false
     block.status = 0
     Main.count--
     removeElem(Main.queens, [block.x, block.y])
   else if Main.count<8
+    imageNum = pickQueenImageNumber()
     $(block).addClass('active')
-    $(block).addClass('cat'+Main.count)
+    $(block).addClass('cat'+imageNum)
     block.status = 1
+    block.image = imageNum
     Main.count++
     Main.queens.push([block.x, block.y])
   if Main.guideEnabled
@@ -199,9 +202,15 @@ refreshGuide = ->
 
 clearGuide = ->
   for g, i in Main.guides
-        $(Main.blocks[g.x][g.y]).removeClass('mark')
-        g.remove()
-      Main.guides = []
+    $(Main.blocks[g.x][g.y]).removeClass('mark')
+    g.remove()
+  Main.guides = []
+
+pickQueenImageNumber = ->
+  for b, i in Main.queenImageUsed
+    if !b
+      Main.queenImageUsed[i] = true
+      return i
 
 #Foundation
 removeElem = (array, value) ->

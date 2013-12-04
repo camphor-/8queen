@@ -34,11 +34,11 @@ module.exports = (grunt)->
           src: '*.styl'
           dest: 'dest/css/'
           ext: '.css']
-
+    ###
     shell:
       rsync:
-        command: ''#'rsync -av /Users/Morishin/Programming/Portfolio/dest/ --exclude ".DS_Store" -e ssh morishin:/usr/share/nginx/html/morishin.me'
-
+        command: 'rsync -av /Users/Morishin/Programming/Portfolio/dest/ --exclude ".DS_Store" -e ssh morishin:/usr/share/nginx/html/morishin.me'
+    ###
     watch:
       jade:
         files: 'src/jade/*.jade'
@@ -60,6 +60,6 @@ module.exports = (grunt)->
 
   grunt.registerTask 'default', ['watch']
   grunt.registerTask 'all', ['jade','stylus','coffee']
-  grunt.registerTask 'deploy', ['shell:rsync']
+  #grunt.registerTask 'deploy', ['shell:rsync']
 
   return
