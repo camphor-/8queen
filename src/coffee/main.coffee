@@ -55,6 +55,7 @@ replaceScene = (id) ->
 toggle = (block) ->
   if block.status
     $(block).removeClass('active')
+    console.log 'cat'+block.image
     $(block).removeClass('cat'+block.image)
     Main.queenImageUsed[block.image] = false
     block.status = 0
@@ -110,11 +111,14 @@ reset = ->
   Main.count = 0
   updateCountLabel()
   for i in [0...8]
+    Main.queenImageUsed[i] = false
     for j in [0...8]
       block = Main.blocks[i][j]
       block.status = 0
       $(block).removeClass('active')
       $(block).removeClass('mark')
+      $(block).removeClass (index, css) ->
+        (css.match(/cat\d/g) || []).join(' ')
   Main.queens = []
   for g, i in Main.guides
     g.remove()

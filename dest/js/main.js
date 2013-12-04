@@ -71,6 +71,7 @@ toggle = function(block) {
   var imageNum;
   if (block.status) {
     $(block).removeClass('active');
+    console.log('cat' + block.image);
     $(block).removeClass('cat' + block.image);
     Main.queenImageUsed[block.image] = false;
     block.status = 0;
@@ -144,11 +145,15 @@ reset = function() {
   Main.count = 0;
   updateCountLabel();
   for (i = _i = 0; _i < 8; i = ++_i) {
+    Main.queenImageUsed[i] = false;
     for (j = _j = 0; _j < 8; j = ++_j) {
       block = Main.blocks[i][j];
       block.status = 0;
       $(block).removeClass('active');
       $(block).removeClass('mark');
+      $(block).removeClass(function(index, css) {
+        return (css.match(/cat\d/g) || []).join(' ');
+      });
     }
   }
   Main.queens = [];
