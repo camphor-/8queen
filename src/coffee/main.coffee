@@ -9,6 +9,7 @@ Main =
   result: false
   queenImageUsed: [false, false, false, false, false, false, false, false]
   nyahSound: null
+  clickSound: null
 
 $ ->
   playBGM()
@@ -26,7 +27,7 @@ $ ->
       Main.blocks[i].push(block)
   updateCountLabel()
   $('#startbutton').click ->
-    playSound('../sound/start.mp3')
+    playSound('../sound/start.wav')
     replaceScene('main')
     Main.time = 0
     startTimer()
@@ -40,15 +41,19 @@ $ ->
     reset()
 
   $('#backbutton').click ->
-    if Main.result
-      reset()
-      Main.guideEnabled = true
-      switchGuide()
-      replaceScene('intro')
+    playClick()
     $('#message').hide()
 
   $('#guidebutton').click ->
+    playClick()
     switchGuide()
+
+  $('#titlebutton').click ->
+    playClick()
+    reset()
+    Main.guideEnabled = true
+    switchGuide()
+    replaceScene('intro')
 
 replaceScene = (id) ->
   scenes = ['intro', 'main', 'message']
@@ -140,11 +145,11 @@ showResult = ->
     if judge()
       playSound('../sound/correct.wav')
       clearInterval(Main.timer)
-      showMessage("正解！<br>✌(’ω’✌ )三✌(’ω’)✌三( ✌’ω’)✌<br><br>タイム: "+(Main.time-1)+"秒")
+      showMessage("正解！<br><br>タイム: "+(Main.time-1)+"秒")
       Main.result = true
     else
       playSound('../sound/wrong.wav')
-      showMessage("不正解<br>('ω'乂)")
+      showMessage("不正解")
       Main.result = false
 
 switchGuide = ->
@@ -234,6 +239,13 @@ playNyah = ->
   else
     Main.nyahSound.currentTime = 0
   Main.nyahSound.play();
+
+playClick = ->
+  if !Main.clickSound
+    Main.clickSound = new Audio('../sound/click.wav')
+  else
+    Main.clickSound.currentTime = 0
+  Main.clickSound.play();
 
 playSound = (path) ->
   sound = new Audio(path)

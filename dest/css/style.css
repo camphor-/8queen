@@ -1,8 +1,10 @@
 body {
   background-image: url("../images/background2.png");
+  font-family: sans-serif;
   padding: 0;
   margin: 0;
   text-align: center;
+  color: #555;
 }
 body #game {
   position: relative;
@@ -39,6 +41,34 @@ body #game #intro .title {
   margin: 0 auto;
   background-image: url("../images/title.png");
 }
+body #game #intro .caption {
+  font-size: 1.25rem;
+}
+body #game #intro .description .fig {
+  float: left;
+  margin: 5px;
+  width: 120px;
+  height: 120px;
+  background-size: contain;
+  border: solid;
+  border-width: 1px;
+}
+body #game #intro .description #fig1 {
+  background-image: url("../images/fig1.png");
+}
+body #game #intro .description #fig2 {
+  background-image: url("../images/fig2.png");
+}
+body #game #intro .description #fig3 {
+  background-image: url("../images/fig3.png");
+}
+body #game #intro .description .statement {
+  text-align: left;
+  display: table-cell;
+  height: 120px;
+  padding: 5px;
+  vertical-align: middle;
+}
 body #game #message {
   background-color: rgba(0,0,0,0.75);
   color: #fff;
@@ -73,13 +103,13 @@ body #game #field .row .block {
   margin: 1px;
   width: 58px;
   height: 58px;
+  background-color: rgba(255,255,255,0.75);
   float: left;
 }
 body #game #field .row .block .guide {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url("../images/mark.png");
   background-size: contain;
   z-index: 1;
 }
@@ -133,6 +163,14 @@ body #game #buttonarea .button.purple:hover {
 }
 body #game #buttonarea .button.purple.disabled {
   background-color: #9b94b8 !important;
+}
+body #game #buttonarea2 {
+  margin-top: 5px;
+  text-align: center;
+}
+body #game #buttonarea2 .button {
+  width: 156px;
+  font-size: 0.75rem;
 }
 .clear {
   clear: both;

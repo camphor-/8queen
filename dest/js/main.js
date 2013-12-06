@@ -1,4 +1,4 @@
-var Main, arraysEqual, clearGuide, judge, pickQueenImageNumber, playBGM, playNyah, playSound, refreshGuide, removeElem, replaceScene, reset, showMessage, showResult, startTimer, switchGuide, toggle, updateCountLabel, updateJudgeButtonState, updateTimeLabel;
+var Main, arraysEqual, clearGuide, judge, pickQueenImageNumber, playBGM, playClick, playNyah, playSound, refreshGuide, removeElem, replaceScene, reset, showMessage, showResult, startTimer, switchGuide, toggle, updateCountLabel, updateJudgeButtonState, updateTimeLabel;
 
 Main = {
   blocks: [[], [], [], [], [], [], [], []],
@@ -10,7 +10,8 @@ Main = {
   timer: null,
   result: false,
   queenImageUsed: [false, false, false, false, false, false, false, false],
-  nyahSound: null
+  nyahSound: null,
+  clickSound: null
 };
 
 $(function() {
@@ -32,7 +33,7 @@ $(function() {
   }
   updateCountLabel();
   $('#startbutton').click(function() {
-    playSound('../sound/start.mp3');
+    playSound('../sound/start.wav');
     replaceScene('main');
     Main.time = 0;
     startTimer();
@@ -48,16 +49,19 @@ $(function() {
     return reset();
   });
   $('#backbutton').click(function() {
-    if (Main.result) {
-      reset();
-      Main.guideEnabled = true;
-      switchGuide();
-      replaceScene('intro');
-    }
+    playClick();
     return $('#message').hide();
   });
-  return $('#guidebutton').click(function() {
+  $('#guidebutton').click(function() {
+    playClick();
     return switchGuide();
+  });
+  return $('#titlebutton').click(function() {
+    playClick();
+    reset();
+    Main.guideEnabled = true;
+    switchGuide();
+    return replaceScene('intro');
   });
 });
 
@@ -182,11 +186,11 @@ showResult = function() {
     if (judge()) {
       playSound('../sound/correct.wav');
       clearInterval(Main.timer);
-      showMessage("正解！<br>✌(’ω’✌ )三✌(’ω’)✌三( ✌’ω’)✌<br><br>タイム: " + (Main.time - 1) + "秒");
+      showMessage("正解！<br><br>タイム: " + (Main.time - 1) + "秒");
       return Main.result = true;
     } else {
       playSound('../sound/wrong.wav');
-      showMessage("不正解<br>('ω'乂)");
+      showMessage("不正解");
       return Main.result = false;
     }
   }
@@ -316,6 +320,15 @@ playNyah = function() {
     Main.nyahSound.currentTime = 0;
   }
   return Main.nyahSound.play();
+};
+
+playClick = function() {
+  if (!Main.clickSound) {
+    Main.clickSound = new Audio('../sound/click.wav');
+  } else {
+    Main.clickSound.currentTime = 0;
+  }
+  return Main.clickSound.play();
 };
 
 playSound = function(path) {

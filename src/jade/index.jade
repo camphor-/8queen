@@ -10,7 +10,20 @@ html(lang='ja')
     #game
       #intro.overlay
         .title
-        .description 説明<br>説明<br>説明<br>説明<br>説明<br>説明<br>説明<br>説明<br>説明<br>説明<br>説明<br>
+        .caption 〜ルールせつめい〜
+        .description
+          #fig1.fig
+          .statement
+            | 8×8マスの盤上で、8匹のにゃんこをお互い取られないように配置するゲームです。にゃんこは縦・横・斜め方向にどこまでも動けます。
+          .clear
+          #fig2.fig
+          .statement
+            | このようにお互い取られる位置に配置してはいけません。
+          .clear
+          #fig3.fig
+          .statement
+            | 互いに取られないようにうまく8匹のにゃんこを盤上に配置してください。
+          .clear
         .ui.green.button#startbutton スタート
       #message.overlay
         .messagelabel
@@ -32,6 +45,8 @@ html(lang='ja')
           .ui.small.red.button#resetbutton リセット
           .ui.small.purple.button.disabled#judgebutton 判定
           .ui.small.blue.button#guidebutton ガイドON
+        #buttonarea2
+          .ui.green.button#titlebutton タイトル
     script(src='../js/jquery-2.0.3.min.js')
     script(src='../js/semantic.min.js')
     script(src='../js/main.js')
