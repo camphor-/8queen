@@ -1,2 +1,0 @@
-#!/bin/bash
-open -a Sublime\ Text\ 2 src/jade/index.jade src/coffee/main.coffee src/stylus/style.styl
