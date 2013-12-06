@@ -8,8 +8,10 @@ Main =
   timer: null
   result: false
   queenImageUsed: [false, false, false, false, false, false, false, false]
+  nyahSound: null
 
 $ ->
+  playBGM()
   replaceScene('intro')
   #ブロック要素を二次元配列に格納
   blocks = $('.block')
@@ -24,6 +26,7 @@ $ ->
       Main.blocks[i].push(block)
   updateCountLabel()
   $('#startbutton').click ->
+    playSound('../sound/start.mp3')
     replaceScene('main')
     Main.time = 0
     startTimer()
@@ -33,6 +36,7 @@ $ ->
       showResult()
 
   $('#resetbutton').click ->
+    playSound('../sound/reset.wav')
     reset()
 
   $('#backbutton').click ->
@@ -62,6 +66,7 @@ toggle = (block) ->
     Main.count--
     removeElem(Main.queens, [block.x, block.y])
   else if Main.count<8
+    playNyah()
     imageNum = pickQueenImageNumber()
     $(block).addClass('active')
     $(block).addClass('cat'+imageNum)
@@ -133,10 +138,12 @@ showMessage = (mes) ->
 showResult = ->
   if !$(this).hasClass('disabled')
     if judge()
+      playSound('../sound/correct.wav')
       clearInterval(Main.timer)
       showMessage("正解！<br>✌(’ω’✌ )三✌(’ω’)✌三( ✌’ω’)✌<br><br>タイム: "+(Main.time-1)+"秒")
       Main.result = true
     else
+      playSound('../sound/wrong.wav')
       showMessage("不正解<br>('ω'乂)")
       Main.result = false
 
@@ -215,6 +222,22 @@ pickQueenImageNumber = ->
     if !b
       Main.queenImageUsed[i] = true
       return i
+
+playBGM = ->
+  bgm = new Audio('../sound/bgm.wav')
+  bgm.loop = true
+  bgm.play()
+
+playNyah = ->
+  if !Main.nyahSound
+    Main.nyahSound = new Audio('../sound/cat.wav')
+  else
+    Main.nyahSound.currentTime = 0
+  Main.nyahSound.play();
+
+playSound = (path) ->
+  sound = new Audio(path)
+  sound.play()
 
 #Foundation
 removeElem = (array, value) ->

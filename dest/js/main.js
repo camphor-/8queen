@@ -1,4 +1,4 @@
-var Main, arraysEqual, clearGuide, judge, pickQueenImageNumber, refreshGuide, removeElem, replaceScene, reset, showMessage, showResult, startTimer, switchGuide, toggle, updateCountLabel, updateJudgeButtonState, updateTimeLabel;
+var Main, arraysEqual, clearGuide, judge, pickQueenImageNumber, playBGM, playNyah, playSound, refreshGuide, removeElem, replaceScene, reset, showMessage, showResult, startTimer, switchGuide, toggle, updateCountLabel, updateJudgeButtonState, updateTimeLabel;
 
 Main = {
   blocks: [[], [], [], [], [], [], [], []],
@@ -9,11 +9,13 @@ Main = {
   time: 0,
   timer: null,
   result: false,
-  queenImageUsed: [false, false, false, false, false, false, false, false]
+  queenImageUsed: [false, false, false, false, false, false, false, false],
+  nyahSound: null
 };
 
 $(function() {
   var block, blocks, i, j, _i, _j;
+  playBGM();
   replaceScene('intro');
   blocks = $('.block');
   for (i = _i = 0; _i < 8; i = ++_i) {
@@ -30,6 +32,7 @@ $(function() {
   }
   updateCountLabel();
   $('#startbutton').click(function() {
+    playSound('../sound/start.mp3');
     replaceScene('main');
     Main.time = 0;
     startTimer();
@@ -41,6 +44,7 @@ $(function() {
     }
   });
   $('#resetbutton').click(function() {
+    playSound('../sound/reset.wav');
     return reset();
   });
   $('#backbutton').click(function() {
@@ -78,6 +82,7 @@ toggle = function(block) {
     Main.count--;
     removeElem(Main.queens, [block.x, block.y]);
   } else if (Main.count < 8) {
+    playNyah();
     imageNum = pickQueenImageNumber();
     $(block).addClass('active');
     $(block).addClass('cat' + imageNum);
@@ -175,10 +180,12 @@ showMessage = function(mes) {
 showResult = function() {
   if (!$(this).hasClass('disabled')) {
     if (judge()) {
+      playSound('../sound/correct.wav');
       clearInterval(Main.timer);
       showMessage("正解！<br>✌(’ω’✌ )三✌(’ω’)✌三( ✌’ω’)✌<br><br>タイム: " + (Main.time - 1) + "秒");
       return Main.result = true;
     } else {
+      playSound('../sound/wrong.wav');
       showMessage("不正解<br>('ω'乂)");
       return Main.result = false;
     }
@@ -293,6 +300,28 @@ pickQueenImageNumber = function() {
       return i;
     }
   }
+};
+
+playBGM = function() {
+  var bgm;
+  bgm = new Audio('../sound/bgm.wav');
+  bgm.loop = true;
+  return bgm.play();
+};
+
+playNyah = function() {
+  if (!Main.nyahSound) {
+    Main.nyahSound = new Audio('../sound/cat.wav');
+  } else {
+    Main.nyahSound.currentTime = 0;
+  }
+  return Main.nyahSound.play();
+};
+
+playSound = function(path) {
+  var sound;
+  sound = new Audio(path);
+  return sound.play();
 };
 
 removeElem = function(array, value) {
